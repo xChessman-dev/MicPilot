@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType><TargetFramework>net10.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF><ImplicitUsings>enable</ImplicitUsings><Nullable>enable</Nullable>
+    <AssemblyName>MicPilot</AssemblyName><Platforms>x64</Platforms><ApplicationIcon>Assets/MicPilot.ico</ApplicationIcon>
+    <MicPilotNativeDir Condition="'$(MICPILOT_NATIVE_DIR)' != ''">$(MICPILOT_NATIVE_DIR)</MicPilotNativeDir>
+    <MicPilotNativeDir Condition="'$(MicPilotNativeDir)' == ''">$(MSBuildThisFileDirectory)../../native/rnnoise</MicPilotNativeDir>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../MicPilot.Core/MicPilot.Core.csproj" />
+    <PackageReference Include="NAudio" Version="3.1.0" />
+    <Resource Include="Assets/MicPilot.ico" /><Resource Include="Assets/MicPilot.png" />
+    <Content Include="$(MicPilotNativeDir)/rnnoise.dll" Link="rnnoise.dll" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" Condition="Exists('$(MicPilotNativeDir)/rnnoise.dll')" />
+    <Content Include="../../THIRD-PARTY-NOTICES.txt" Link="THIRD-PARTY-NOTICES.txt" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+    <Content Include="../../README.md" Link="README.md" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+  </ItemGroup>
+</Project>
